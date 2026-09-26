@@ -63,6 +63,16 @@
                     </div>
                 </div>
 
+                <!-- Input URL Gambar Produk -->
+<div>
+    <label class="block text-slate-300 mb-1 font-bold">URL Gambar Produk (Opsional)</label>
+    <input type="url" name="image" value="{{ old('image') }}" placeholder="https://images.unsplash.com/..." class="w-full bg-[#080c14] border border-slate-800 rounded-xl p-3 text-slate-100 focus:outline-none focus:border-emerald-500 font-sans">
+    <span class="text-slate-500 text-[11px] mt-1 block">Biarkan kosong untuk menggunakan gambar default.</span>
+    @error('image')
+        <span class="text-rose-400 text-[11px] mt-1 block">{{ $message }}</span>
+    @enderror
+</div>
+
                 <!-- Jumlah Stok -->
                 <div>
                     <label class="block text-slate-300 mb-1 font-bold">Jumlah Stok</label>

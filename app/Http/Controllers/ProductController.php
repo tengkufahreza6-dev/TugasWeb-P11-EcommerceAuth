@@ -93,6 +93,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'description' => 'required',
+            'image' => 'nullable|url',
         ]);
 
         $validated['slug'] = Str::slug($request->name) . '-' . time();
