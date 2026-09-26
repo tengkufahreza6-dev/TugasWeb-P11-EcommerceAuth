@@ -42,25 +42,30 @@ class ProductController extends Controller
 
     // Simpan Produk Baru (Khusus Admin & Editor)
     public function store(Request $request)
-    {
-        $this->authorize('create', Product::class);
+{
+    $this->authorize('create', Product::class);
 
-        $validated = $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'name' => 'required|max:255',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'description' => 'required',
-        ]);
+    $validated = $request->validate([
+        'category_id' => 'required|exists:categories,id',
+        'name' => 'required|max:255',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'description' => 'required',
+        'image' => 'nullable|url',
+    ]);
 
-        $validated['slug'] = Str::slug($request->name) . '-' . time();
-        $validated['is_active'] = true;
-        $validated['image'] = 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80';
+    $validated['slug'] = Str::slug($request->name) . '-' . time();
+    $validated['is_active'] = true;
+    
+    // Gunakan gambar yang diinput, atau fallback ke default Unsplash hardware
+    $validated['image'] = $request->filled('image') 
+        ? $request->image 
+        : 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80';
 
-        Product::create($validated);
+    Product::create($validated);
 
-        return redirect()->route('products.index')->with('success', 'Produk baru berhasil ditambahkan!');
-    }
+    return redirect()->route('products.index')->with('success', 'Produk baru berhasil ditambahkan!');
+}
 
     // Detail Produk
     public function show(Product $product)
