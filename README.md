@@ -15,6 +15,7 @@
 
 - **Nama Mahasiswa:** Tengku Fahreza
 - **NIM:** 4252550005
+- **Kelas:** PSIK 25B
 - **Program Studi:** Ilmu Komputer
 - **Mata Kuliah:** Pemrograman Web
 - **Instansi:** Universitas Negeri Medan (UNIMED)
